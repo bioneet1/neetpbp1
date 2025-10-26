@@ -41205,6 +41205,65 @@ answer: "d) An invention or a novelty"
     }, 300);
   });
 
+
+
+  <script>
+  function processSummaryWithChatGPT(summaryHTML) {
+    const pointers = summaryHTML.split('<br><br>').filter(p => p.trim());
+    let processedHTML = '';
+    
+    const defaultNote = "Note: don't leave the chatgpt page without clicking the submit arrow, as it may result in repeated display of the same pointer even in the next chat";
+    processedHTML += '<div class="summary-pointer" style="background-color: rgba(255, 200, 87, 0.3); border: 2px solid #ff9800;"><span class="pointer-text" style="font-weight: 600; color: #e65100;">' + defaultNote + '</span></div>';
+    
+    pointers.forEach((pointer, index) => {
+      let cleanPointer = pointer.replace(/<br>/g, ' ').trim();
+      cleanPointer = cleanPointer.replace(/^d+.s*/, '');
+      
+      if (cleanPointer) {
+        const escapedPointer = cleanPointer.replace(/`/g, '\\`').replace(/'/g, "\\'");
+        processedHTML += '<div class="summary-pointer"><span class="pointer-text">' + pointer.trim() + ' <button class="pointer-chatgpt-btn" onclick="openChatGPTForPointer(`' + escapedPointer + '`)">AI</button></span></div>';
+      }
+    });
+    
+    return processedHTML;
+  }
+  </script>
+<script>
+  const originalShowQuestions = showQuestions;
+  
+  showQuestions = function() {
+    originalShowQuestions();
+    
+    const contentArea = document.getElementById('contentArea');
+    const firstQuestion = contentArea.querySelector('.question-item');
+    
+    if (firstQuestion) {
+      const defaultMCQNote = "Note: don't leave the chatgpt page without clicking the submit arrow, as it may result in repeated display of the same MCQ even in the next chat";
+      const noteDiv = document.createElement('div');
+      noteDiv.style.cssText = 'background-color: rgba(255, 200, 87, 0.3); border: 2px solid #ff9800; padding: 16px 20px; border-radius: 10px; margin-bottom: 26px; font-weight: 600; color: #e65100; font-size: 15px;';
+      noteDiv.textContent = defaultMCQNote;
+      
+      firstQuestion.insertAdjacentElement('afterend', noteDiv);
+    }
+  };
+</script>
+<script>
+  function openChatGPTForPointer(pointerText) {
+    const prompt = `"${pointerText}"
+
+Version 1: explain this statement with keywords emphasis
+
+Or type any other query below
+
+
+Note: don't leave the chatgpt page without clicking the submit arrow,as it may result in repeated display of the same pointer in the next chat`;
+    const chatGPTURL = `https://chat.openai.com/?q=${encodeURIComponent(prompt)}`;
+    window.open(chatGPTURL, '_blank');
+  }
+</script>
+
+
+  
 </script>
 </body>
 </html>

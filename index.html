@@ -41220,61 +41220,17 @@ Or type any other query below`;
 </script>
 
 
-<!-- COMPLETE ADDON: ABOUT SECTION + COMPACT COUNTER -->
-
-<!-- About NEET Pointers Section -->
-<div style="max-width: 900px; margin: 20px auto 25px auto; padding: 0 20px;">
-  <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 16px; box-shadow: 0 6px 20px rgba(45, 106, 79, 0.3); overflow: hidden;">
-    <!-- Clickable Header Tab -->
-    <div onclick="toggleAboutSection()" style="background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%); padding: 18px 28px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.3s ease;">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <span style="font-size: 28px;">💡</span>
-        <h3 style="margin: 0; color: white; font-size: 20px; font-weight: 800; letter-spacing: 0.5px;">About NEET POINTERS</h3>
-      </div>
-      <span id="aboutToggleIcon" style="color: white; font-size: 24px; font-weight: bold; transition: transform 0.3s ease;">▼</span>
-    </div>
-    
-    <!-- Expandable Content -->
-    <div id="aboutContent" style="display: none; padding: 28px 32px; background: white; color: #1f2937;">
-      <div style="margin-bottom: 24px;">
-        <h4 style="color: #2d6a4f; font-size: 18px; font-weight: 800; margin: 0 0 12px 0;">What is NEET Pointers? 🎯</h4>
-        <p style="font-size: 15px; line-height: 1.8; margin: 0; color: #374151;">
-          <strong>NEET POINTERS</strong> comprehensively covers the entire concept of the page in <strong>clear, digestible points</strong>. This could be your <strong>game changer</strong> for NEET preparation!
-        </p>
-      </div>
-      
-      <div style="background: linear-gradient(135deg, #fff8f0 0%, #ffe4cc 100%); padding: 20px; border-radius: 12px; border-left: 5px solid #ff9800; margin-bottom: 20px;">
-        <h4 style="color: #ff6b00; font-size: 17px; font-weight: 800; margin: 0 0 14px 0;">🎓 Dual Purpose Learning</h4>
-        
-        <div style="margin-bottom: 16px;">
-          <div style="display: flex; gap: 12px; align-items: start;">
-            <span style="background: #ff9800; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</span>
-            <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #1f2937;">
-              <strong>Scientific Learning:</strong> It is scientifically proven that students' interaction with <strong>points is much better</strong> than bulky paragraph interaction. Your brain processes information more efficiently!
-            </p>
-          </div>
-        </div>
-        
-        <div>
-          <div style="display: flex; gap: 12px; align-items: start;">
-            <span style="background: #ff9800; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</span>
-            <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #1f2937;">
-              <strong>AI-Driven Learning Tool:</strong> These pointers convert your whole book into an <strong>AI-driven learning tool</strong>. Each point has a ChatGPT button that opens the gateway for <strong>intuitively engaging in conversation with AI</strong> to get 100% clarity.
-            </p>
-          </div>
-        </div>
-      </div>
-      
-      <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 18px; border-radius: 12px; border-left: 5px solid #2196F3;">
-        <p style="margin: 0; font-size: 15px; line-height: 1.8; color: #1f2937;">
-          <strong>🚀 Unlike other websites</strong> that give you plain summaries, here <strong>YOU are the one governing the understanding process</strong>, resulting in <strong>crystal clear learning</strong>. Not just reading — truly understanding!
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
+<!-- FIXED: ABOUT SECTION APPEARS BEFORE COUNTER -->
 <style>
+  /* Force About section to appear on top */
+  .about-neet-section {
+    position: relative;
+    z-index: 100;
+    max-width: 900px;
+    margin: 20px auto 25px auto;
+    padding: 0 20px;
+  }
+  
   /* Hide MCQ counter completely */
   .stats-counter .counter-item:first-child,
   .stats-counter .counter-divider:first-of-type {
@@ -41287,6 +41243,8 @@ Or type any other query below`;
     padding: 28px 35px !important;
     gap: 50px !important;
     margin-bottom: 28px !important;
+    position: relative;
+    z-index: 50;
   }
   
   /* Increase NEET POINTERS label font */
@@ -41317,13 +41275,6 @@ Or type any other query below`;
   /* Reduce divider height */
   .stats-counter .counter-divider {
     height: 70px !important;
-  }
-  
-  /* Compact layout */
-  .stats-counter {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
   }
   
   /* Mobile responsive */
@@ -41359,8 +41310,71 @@ Or type any other query below`;
 </style>
 
 <script>
+  // Insert About section BEFORE the counter
+  document.addEventListener('DOMContentLoaded', function() {
+    const counter = document.querySelector('.stats-counter');
+    if (counter) {
+      const aboutSection = document.createElement('div');
+      aboutSection.className = 'about-neet-section';
+      aboutSection.innerHTML = `
+        <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 16px; box-shadow: 0 6px 20px rgba(45, 106, 79, 0.3); overflow: hidden;">
+          <!-- Clickable Header Tab -->
+          <div onclick="toggleAboutSection()" style="background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%); padding: 18px 28px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.3s ease;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 28px;">💡</span>
+              <h3 style="margin: 0; color: white; font-size: 20px; font-weight: 800; letter-spacing: 0.5px;">About NEET POINTERS</h3>
+            </div>
+            <span id="aboutToggleIcon" style="color: white; font-size: 24px; font-weight: bold; transition: transform 0.3s ease;">▼</span>
+          </div>
+          
+          <!-- Expandable Content -->
+          <div id="aboutContent" style="display: none; padding: 28px 32px; background: white; color: #1f2937;">
+            <div style="margin-bottom: 24px;">
+              <h4 style="color: #2d6a4f; font-size: 18px; font-weight: 800; margin: 0 0 12px 0;">What is NEET Pointers? 🎯</h4>
+              <p style="font-size: 15px; line-height: 1.8; margin: 0; color: #374151;">
+                <strong>NEET POINTERS</strong> comprehensively covers the entire concept of the page in <strong>clear, digestible points</strong>. This could be your <strong>game changer</strong> for NEET preparation!
+              </p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #fff8f0 0%, #ffe4cc 100%); padding: 20px; border-radius: 12px; border-left: 5px solid #ff9800; margin-bottom: 20px;">
+              <h4 style="color: #ff6b00; font-size: 17px; font-weight: 800; margin: 0 0 14px 0;">🎓 Dual Purpose Learning</h4>
+              
+              <div style="margin-bottom: 16px;">
+                <div style="display: flex; gap: 12px; align-items: start;">
+                  <span style="background: #ff9800; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</span>
+                  <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #1f2937;">
+                    <strong>Scientific Learning:</strong> It is scientifically proven that students' interaction with <strong>points is much better</strong> than bulky paragraph interaction. Your brain processes information more efficiently!
+                  </p>
+                </div>
+              </div>
+              
+              <div>
+                <div style="display: flex; gap: 12px; align-items: start;">
+                  <span style="background: #ff9800; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</span>
+                  <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #1f2937;">
+                    <strong>AI-Driven Learning Tool:</strong> These pointers convert your whole book into an <strong>AI-driven learning tool</strong>. Each point has a ChatGPT button that opens the gateway for <strong>intuitively engaging in conversation with AI</strong> to get 100% clarity.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 18px; border-radius: 12px; border-left: 5px solid #2196F3;">
+              <p style="margin: 0; font-size: 15px; line-height: 1.8; color: #1f2937;">
+                <strong>🚀 Unlike other websites</strong> that give you plain summaries, here <strong>YOU are the one governing the understanding process</strong>, resulting in <strong>crystal clear learning</strong>. Not just reading — truly understanding!
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Insert BEFORE the counter
+      counter.parentNode.insertBefore(aboutSection, counter);
+      console.log('✅ About section inserted before counter');
+    }
+  });
+  
   // Toggle About NEET Pointers section
-  function toggleAboutSection() {
+  window.toggleAboutSection = function() {
     const content = document.getElementById('aboutContent');
     const icon = document.getElementById('aboutToggleIcon');
     
@@ -41373,7 +41387,7 @@ Or type any other query below`;
       icon.style.transform = 'rotate(0deg)';
       icon.textContent = '▼';
     }
-  }
+  };
   
   // Only animate NEET Pointers counter
   window.addEventListener('load', () => {

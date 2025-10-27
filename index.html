@@ -41218,6 +41218,69 @@ Or type any other query below`;
     window.open(chatGPTURL, '_blank');
   }
 </script>
+<!-- ADDON: REMOVE MCQ COUNTER & INCREASE NEET POINTERS SIZE -->
+<style>
+  /* Hide the first counter item (MCQs) and its divider */
+  .stats-counter .counter-item:first-child,
+  .stats-counter .counter-divider:first-of-type {
+    display: none !important;
+  }
+  
+  /* Increase NEET Pointers label font size */
+  .stats-counter .counter-item:nth-child(3) .counter-label {
+    font-size: 16px !important;
+    letter-spacing: 2.5px !important;
+  }
+  
+  /* Increase NEET Pointers digit size */
+  .stats-counter .counter-item:nth-child(3) .digit-number {
+    font-size: 48px !important;
+  }
+  
+  /* Increase digit box size for better visibility */
+  .stats-counter .counter-item:nth-child(3) .digit-box {
+    width: 55px !important;
+    height: 75px !important;
+  }
+  
+  /* Increase plus sign size */
+  .stats-counter .counter-item:nth-child(3) .plus-sign {
+    font-size: 40px !important;
+  }
+  
+  /* Center remaining items better */
+  .stats-counter {
+    justify-content: center !important;
+    gap: 60px !important;
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 900px) {
+    .stats-counter .counter-item:nth-child(3) .counter-label {
+      font-size: 13px !important;
+    }
+    
+    .stats-counter .counter-item:nth-child(3) .digit-number {
+      font-size: 40px !important;
+    }
+    
+    .stats-counter .counter-item:nth-child(3) .digit-box {
+      width: 46px !important;
+      height: 65px !important;
+    }
+  }
+</style>
+
+<script>
+  // Update counter animation to only animate NEET Pointers
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      // Only animate NEET Pointers (10000)
+      animateCounterDigits(['ptr-d1', 'ptr-d2', 'ptr-d3', 'ptr-d4', 'ptr-d5'], 10000, 2500);
+    }, 300);
+  });
+</script>
+  
 </body>
 </html>
 
